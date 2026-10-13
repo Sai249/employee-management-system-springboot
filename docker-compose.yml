@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ems-postgres
+    environment:
+      POSTGRES_DB: employee_db
+      POSTGRES_USER: employee_user
+      POSTGRES_PASSWORD: employee_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U employee_user -d employee_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    container_name: employee-management-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/employee_db
+      DB_USERNAME: employee_user
+      DB_PASSWORD: employee_password
+      JWT_SECRET: change-this-demo-secret-to-a-long-random-256-bit-value
+      ADMIN_EMAIL: admin@ems.local
+      ADMIN_PASSWORD: ChangeMe123!
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
