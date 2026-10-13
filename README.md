@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Employee Management System
 
 A production-style Spring Boot REST API for managing employees. It demonstrates CRUD design, JPA/Hibernate, PostgreSQL, validation, JWT authentication, role-based access control, pagination, structured error responses, logging, OpenAPI documentation, Docker, and unit tests.
@@ -65,3 +66,7 @@ Registering through `POST /api/v1/auth/register` always creates a `USER`, preven
 - The list API uses `Pageable` and validates sort fields to avoid invalid/dangerous queries.
 - `@RestControllerAdvice` turns validation, business, and authentication failures into predictable JSON responses.
 - Docker Compose starts the API only after PostgreSQL has passed its health check.
+=======
+
+A RESTful Employee Management System built with Spring Boot, Spring Data JPA, and PostgreSQL. Implements CRUD operations, layered architecture, request validation, exception handling, and database integration for efficient employee record management.
+>>>>>>> bccccf4ac0d388fbe5279bc286b03fb8fd7635ba
